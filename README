@@ -1,0 +1,4 @@
+A library to access EXIF information.
+
+This is originally written by Shigenobu Kimura.  Shiro Kawai packaged
+it as an extension.  Not really completed yet.
