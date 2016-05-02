@@ -153,7 +153,7 @@
 (define-constant DATE-TIME-ORIGINAL       #x9003)
 (define-constant DATE-TIME-DIGITIZED      #x9004)
 (define-constant COMPONENTS-CONFIGURATION #x9101)
-(define-constant COMPRESS-BITS-PER-PIXEL  #x9102)
+(define-constant COMPRESSED-BITS-PER-PIXEL  #x9102)
 (define-constant SHUTTER-SPEED-VALUE      #x9201)
 (define-constant APERTURE-VALUE           #x9202)
 (define-constant BRIGHTNESS-VALUE         #x9203)
@@ -487,13 +487,13 @@
 (define (get-app1-from-file file)
   (with-input-from-file file
     (lambda ()
-      (let lp ((mk (read-jpeg-marker)))
-        (cond ((= (car mk) APP1)
+      (let lp ((mk (jpeg-read-marker)))
+        (cond ((= (car mk) JPEG_APP1)
                (cadr mk))
-              ((= (car mk) SOS)
+              ((= (car mk) JPEG_SOS)
                #f)
               (else
-               (lp (read-jpeg-marker))))))))
+               (lp (jpeg-read-marker))))))))
 
 (define (get-tiff-data&endian-from-file file)
   (let ((app1 (get-app1-from-file file)))
@@ -503,23 +503,23 @@
 (define-syntax use-tags
   (syntax-rules ()
     ((_ sym)
-     (define-constant sym (with-module ggc.file.exif sym)))
+     (define-constant sym (with-module file.exif sym)))
     ((_ sym1 sym2 ...)
      (begin
-       (define-constant sym1 (with-module ggc.file.exif sym1))
+       (define-constant sym1 (with-module file.exif sym1))
        (use-tags sym2 ...)))))
 ;;;
 ;;;
 ;;;
-(autoload "ggc/file/exif-data"      
+(autoload "file/exif/data"      
           print-exif-tag ifd-tags  maker-note-getter&tags)
 
-(autoload "ggc/file/exif-fujifilm"  
+(autoload "file/exif/fujifilm"  
           maker-note-fujifilm fujifilm-tags)
-(autoload "ggc/file/exif-nikon"
+(autoload "file/exif/nikon"
           maker-note-nikon  nikon-tags
           maker-note-nikon1 nikon1-tags)
-(autoload "ggc/file/exif-olympus"
+(autoload "file/exif/olympus"
           maker-note-olympus  olympus-tags)
 
 ;;;
@@ -537,7 +537,7 @@
   (get-tag-string ifd0 MODEL))
 
 (define-method get-orientaion ((ifd0 <exif-ifd>))
-  (case (get-tag-vale ifd0 ORIENTATION)
+  (case (get-tag-value ifd0 ORIENTATION)
     ((1) 'top-left)
     ((2) 'top-right)
     ((3) 'bottom-rihgt)
@@ -712,4 +712,3 @@
     ((#f) #f)
     (else 'unknown-code)))
 
-(provide "file/exif")

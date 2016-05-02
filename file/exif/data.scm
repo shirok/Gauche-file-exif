@@ -6,7 +6,7 @@
 ;;; TsuruZoh Tachibanaya, Exif file format, Rev 1.4, Feb. 3, 2001,
 ;;; (http://park2.wakwak.com/~tsuruzoh/Computer/Digicams/exif.html).
 ;;;
-(select-module ggc.file.exif)
+(select-module file.exif)
 
 (define ifd-tags (make-hash-table))
 (for-each (lambda (x)

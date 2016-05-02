@@ -1,7 +1,7 @@
 ;;;
 ;;; Maker note information for Fujifilm.
 ;;;
-(select-module ggc.file.exif)
+(select-module file.exif)
 ;;;
 ;;; Fujifilm
 ;;; 

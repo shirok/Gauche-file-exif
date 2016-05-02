@@ -1,7 +1,7 @@
 ;;;
 ;;; Maker note information for OLYMPUS.
 ;;;
-(select-module ggc.file.exif)
+(select-module file.exif)
 ;;;
 ;;;
 ;;;

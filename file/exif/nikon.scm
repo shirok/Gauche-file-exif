@@ -1,7 +1,7 @@
 ;;;
 ;;; Maker note information for Nikon.
 ;;;
-(select-module ggc.file.exif)
+(select-module file.exif)
 ;;;
 ;;; Nikon E700/E800/E900/E900S/E910/E950
 ;;; 

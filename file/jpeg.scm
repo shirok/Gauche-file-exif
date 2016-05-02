@@ -125,5 +125,3 @@
 (define (jpeg-eof-error port)
   (errorf <jpeg-format-error>
           "unexpected end-of-file during reading JPEG file from ~s" p))
-
-(provide "file/jpeg")
